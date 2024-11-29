@@ -1,0 +1,47 @@
+
+name: CI
+
+on:
+    push:
+        branches: [main, master]
+    pull_request:
+        branches: [main, master]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env:
+            NODE_VERSION: 18.x
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
+
+            - name: Cache Dependencies
+              uses: actions/cache@v3
+              with:
+                  path: |
+                      ~/.npm
+                      # ~/.cache/yarn # Uncomment if using Yarn
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
+
+            - name: Install Dependencies
+              run: |
+                  npm install
+
+            - name: Lint and Format Project
+              run: |
+                  npm run lint:fix:format
+
+            - name: Build Project
+              run: |
+                  npm run build
