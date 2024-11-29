@@ -14,7 +14,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <FormProvider>
         <div className="container mx-auto px-4">
-          <main className='min-h-screen w-screen flex justify-center items-center'>
+          <main className="min-h-screen w-screen flex justify-center items-center">
             <Routes>
               <Route path="/" element={<PersonalInfo />} />
               <Route path="/location" element={<Location />} />

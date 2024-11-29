@@ -39,7 +39,7 @@ const Summary: React.FC = () => {
       <Card className="mb-6">
         <CardHeader className="flex justify-between items-center">
           <h3 className="text-xl font-medium">Personal Information</h3>
-          <Button variant='default' onClick={() => handleEdit('personal')}>
+          <Button variant="default" onClick={() => handleEdit('personal')}>
             Edit
           </Button>
         </CardHeader>
@@ -75,7 +75,7 @@ const Summary: React.FC = () => {
       <Card className="mb-6">
         <CardHeader className="flex justify-between items-center">
           <h3 className="text-xl font-medium">Location Information</h3>
-          <Button variant='default' onClick={() => handleEdit('location')}>
+          <Button variant="default" onClick={() => handleEdit('location')}>
             Edit
           </Button>
         </CardHeader>
@@ -105,7 +105,7 @@ const Summary: React.FC = () => {
       <Card className="mb-6">
         <CardHeader className="flex justify-between items-center">
           <h3 className="text-xl font-medium">Payment Information</h3>
-          <Button variant='default' onClick={() => handleEdit('payment')}>
+          <Button variant="default" onClick={() => handleEdit('payment')}>
             Edit
           </Button>
         </CardHeader>

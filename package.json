@@ -23,6 +23,7 @@
     "axios": "^1.7.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "format": "^0.2.2",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.4.3",
     "react": "^18.3.1",

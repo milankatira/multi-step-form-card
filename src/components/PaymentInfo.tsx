@@ -8,25 +8,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 
-// Validation schema
 const paymentInfoSchema = z.object({
   cardNumber: z
     .string()
-    .transform((value) => value.replace(/\s+/g, '')) // Remove spaces for validation
+    .transform((value) => value.replace(/\s+/g, ''))
     .refine((value) => /^[0-9]{16}$/.test(value), {
       message: 'Credit Card Number must be 16 digits.',
     }),
   expiryDate: z
     .string()
-    .transform((value) => value.replace(/\//g, '')) // Remove slashes for validation
+    .transform((value) => value.replace(/\//g, ''))
     .refine((value) => /^(0[1-9]|1[0-2])[0-9]{2}$/.test(value), {
       message: 'Expiry Date must be in MM/YY format.',
     }),
-  cvv: z
-    .string()
-    .refine((value) => /^[0-9]{3,4}$/.test(value), {
-      message: 'CVV must be 3 or 4 digits.',
-    }),
+  cvv: z.string().refine((value) => /^[0-9]{3,4}$/.test(value), {
+    message: 'CVV must be 3 or 4 digits.',
+  }),
   billingAddress: z.string().optional(),
 });
 
@@ -41,7 +38,6 @@ const PaymentInfo: React.FC = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm<PaymentInfoInputs>({
     resolver: zodResolver(paymentInfoSchema),
     defaultValues: formData.payment,
@@ -89,7 +85,9 @@ const PaymentInfo: React.FC = () => {
               <Input
                 type="text"
                 value={formatCardNumber(field.value)}
-                onChange={(e) => field.onChange(formatCardNumber(e.target.value))}
+                onChange={(e) =>
+                  field.onChange(formatCardNumber(e.target.value))
+                }
                 placeholder="1234 5678 1234 5678"
                 error={errors.cardNumber?.message}
                 maxLength={19} // 16 digits + 3 spaces
@@ -98,7 +96,6 @@ const PaymentInfo: React.FC = () => {
           />
         </div>
 
-        {/* Expiry Date Field */}
         <div className="mb-4">
           <label className="block mb-1">
             Expiry Date (MM/YY)<span className="text-red-500">*</span>
@@ -110,16 +107,17 @@ const PaymentInfo: React.FC = () => {
               <Input
                 type="text"
                 value={formatExpiryDate(field.value)}
-                onChange={(e) => field.onChange(formatExpiryDate(e.target.value))}
+                onChange={(e) =>
+                  field.onChange(formatExpiryDate(e.target.value))
+                }
                 placeholder="MM/YY"
                 error={errors.expiryDate?.message}
-                maxLength={5} // MM/YY
+                maxLength={5}
               />
             )}
           />
         </div>
 
-        {/* CVV Field */}
         <div className="mb-4">
           <label className="block mb-1">
             CVV<span className="text-red-500">*</span>
@@ -133,7 +131,6 @@ const PaymentInfo: React.FC = () => {
           />
         </div>
 
-        {/* Billing Address Field */}
         <div className="mb-4">
           <label className="block mb-1">
             Billing Address (if different from shipping)
@@ -146,7 +143,6 @@ const PaymentInfo: React.FC = () => {
           />
         </div>
 
-        {/* Form Buttons */}
         <div className="flex justify-between">
           <Button
             type="button"
